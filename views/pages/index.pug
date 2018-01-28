@@ -1,0 +1,61 @@
+extends ../template 
+block title
+    title Добро пожаловать
+    - var page = 'index'
+block first-section
+block content
+    block parallax
+        include ../common/index-parallax
+    section.index-section
+        .index-section__top
+            button.index-section__auth-btn(type="button") Авторизоваться
+        .index-section__center.animated
+
+            .index-panel.index-panel_first
+                .index-panel__top 
+                    .index-panel__person-card
+                        block person-card
+                            include ../common/person-card
+                    block socials
+                        include ../common/socials
+                .index-panel__bottom
+                    a.index-panel__btn.index-panel__btn_my-works(href="my-works") Мои работы
+                    a.index-panel__btn.index-panel__btn_about-me(href="about") Обо мне
+                    a.index-panel__btn.index-panel__btn_blog(href="blog") Блог
+
+
+            .index-panel.index-panel_second
+                .index-panel__top
+                    form.auth-form(action="#")
+                        .auth-form__wrapper
+                            .auth-form__title Авторизуйтесь
+                            .auth-form__prompt.auth-form__prompt_login
+                                svg.auth-form__icon.auth-form__icon_login
+                                    use(xlink:href="./assets/icons/svg/symbols.svg#login")
+                                input.auth-form__input.auth-form__input_login(type="text" placeholder="Логин" required)
+                            .auth-form__prompt.auth-form__prompt_password
+                                svg.auth-form__icon.auth-form__icon_password
+                                        use(xlink:href="./assets/icons/svg/symbols.svg#password")    
+                                input.auth-form__input.auth-form__input_password(type="text" placeholder="Пароль" required)
+
+                            label.auth-form__check-block
+                                input.auth-form__human-check.visually-hidden(type="checkbox" required)
+                                .auth-form__human-check-title Я человек
+
+                            .auth-form__question Вы точно не робот?
+
+                            .auth-form__radio
+                                label.auth-form__radio-block(for="not-robot")
+                                    input.auth-form__human-radio.visually-hidden(type="radio" name="robot" value="robot" id="not-robot" required)
+                                    .auth-form__human-radio-title Да
+                                label.auth-form__radio-block(for="robot")
+                                    input.auth-form__human-radio.visually-hidden(type="radio" name="robot" value="not-robot" id="robot")
+                                    .auth-form__human-radio-title Не уверен
+                .index-panel__bottom
+                    a.index-panel__btn.index-panel__btn_index(href="#") На главную
+                    a.index-panel__btn.index-panel__btn_enter(href="#") Войти
+
+
+
+            
+        .index-section__bottom © Суров Константин | создано с любовью в LoftSchool | 2017

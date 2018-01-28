@@ -1,0 +1,27 @@
+footer.footer
+        .footer__part.footer__top
+            ul.footer__nav.footer-nav
+                li.footer-nav__item
+                    a.footer-nav__link(href="#") Мои работы
+                li.footer-nav__item
+                    a.footer-nav__link(href="#") Обо мне
+                li.footer-nav__item
+                    a.footer-nav__link(href="#") Блог
+                li.footer-nav__item
+                    a.footer-nav__link(href="#") Авторизация
+            ul.footer__socials.footer-socials
+                each icon in [['vk', 'vk_round', 23, 13, 'vk.com/q05t9n'],['github', 'github_round', 20, 16,'github.com/surov-kostya'],['in', 'in_round', 18, 17, 'linkedin.com/in/q05t9n/']]
+                    - var xCenter = (40-icon[2])/2
+                    - var yCenter =  (44-icon[3])/2
+                    li.footer-socials__item
+                        a.footer-socials__link(href="http://www." +icon[4] target="_blank")
+                            svg.footer-socials__img                            
+                                use(width="" + icon[2] +"px" height="" + icon[3] +"px" x=xCenter y=yCenter xlink:href="./assets/icons/svg/symbols.svg#" + icon[0])
+                                use(y='3' x="0" width="38px" height="38px" xlink:href="./assets/icons/svg/symbols.svg#" + icon[1])
+        .footer__part.footer__bottom
+            .footer__text.footer__text_left
+                p.
+                    Я веб-разработчик из Санкт-Петербурга, и этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool.
+            .footer__text.footer__text_right
+                p.
+                    © Суров Константин | создано с любовью в LoftSchool | 2017

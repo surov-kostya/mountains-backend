@@ -1,0 +1,33 @@
+block parallax
+    include first-parallax
+section.first-section
+
+    block fullscreen-menu
+        include fullscreen-menu
+
+    header.first-section__header.header
+        .header__socials
+            block socials
+                include socials
+
+        .header__hamburger.hamburger
+            button.hamburger__button(type='button')
+                label.hamburger__label
+                    input.hamburger__input(type="checkbox").visually-hidden
+                    each position in ['top', 'center', 'bottom']
+                        .hamburger__block(class='hamburger__block_' + position)
+    
+    .first-section__title
+        svg.first-section__title-img
+            use(xlink:href='./assets/icons/svg/symbols.svg#portfolio_header')
+    .first-section__person-card 
+        block person-card
+            include person-card
+    .first-section__arrow
+        a.first-section__arrow-link(href='#')
+            svg.first-section__arrow-img
+                use(xlink:href="./assets/icons/svg/symbols.svg#arrow_down")
+    .first-section__angles
+        .first-section__angle-block.first-section__angle-block_left
+        .first-section__angle-block.first-section__angle-block_right
+        

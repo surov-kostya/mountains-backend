@@ -1,0 +1,6 @@
+ul.socials
+    each item in ['vk', 'github', 'in']
+        li.socials__item
+            a.socials__link(href="#")
+                svg.socials__img                            
+                    use(xlink:href='./assets/icons/svg/symbols.svg#' + item)

@@ -1,0 +1,118 @@
+extends ../template 
+
+block title
+    title Мои работы
+    - var page = 'works'
+block content
+    section.works__second-section.works-second-section
+        .works-second-section__title
+            svg.works-second-section__title-bg
+                use(xlink:href="./assets/icons/svg/symbols.svg#works_header")
+            .works-second-section__title-text Мои работы
+        .works-second-section__projects
+            ul.projects
+                - var schoolPic = './assets/images/project-slider/school.png'
+                - var schoolTech = 'HTML, CSS, JavaScript'
+                - var schoolLink = '#'
+                - var schoolDesc = 'Сайт школы онлайн образования'
+                - var yogaPic = './assets/images/project-slider/yoga.png'
+                - var yogaTech = 'HTML, CSS, JavaScript'
+                - var yogaLink = '#'
+                - var yogaDesc = 'Сайт йоги'
+                - var designPic = './assets/images/project-slider/design.png'
+                - var designTech = 'HTML, CSS, JavaScript'
+                - var designLink = '#'
+                - var designDesc = 'Сайт дизайна'
+                - var school = [schoolDesc, schoolTech, schoolLink, schoolPic, '"school"', designPic, yogaPic]
+                - var yoga = [yogaDesc, yogaTech, yogaLink, yogaPic, '"yoga"', schoolPic, designPic]
+                - var design = [designDesc, designTech, designLink, designPic, '"design"', yogaPic, schoolPic]
+                each slide in [school, yoga, design]
+                
+                    li.projects__item(v-show=`status === ${slide[4]}` data-project= `${slide[4]}`)
+                        .projects__left.project-description.project-description_outer
+                            .project-description__title.animated.fadeIn #{slide[0]}
+                            .project-description__technologies.animated.fadeIn #{slide[1]}
+                            a.project-description__link(href="" +slide[2]) Посмотреть сайт
+                                svg.project-description__link-icon
+                                    use(xlink:href="./assets/icons/svg/symbols.svg#link")
+                        .projects__right.project-slider
+                            transition(mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut")
+                                .project-slider__big-bg(v-show=`status === ${slide[4]}` style=`background-image:url(${slide[3]})`)
+                                    img.project-slider__picture.visually-hidden(src="" + slide[3])
+
+                            .project-description.project-description_inner
+                                .project-description__title #{slide[0]}
+                                .project-description__technologies #{slide[1]}
+                                a.project-description__link(href="" +slide[2]) Посмотреть сайт
+                                    svg.project-description__link-icon
+                                        use(xlink:href="./assets/icons/svg/symbols.svg#link")
+
+                            .project-slider__controls
+                                button.project-slider__button.project-slider__button_prev(@click.prevent="prevBtnClick")
+                                    transition(mode="out-in" enter-active-class="animated slideInDown" leave-active-class="animated slideInUp")
+                                        .project-slider__bg.project-slider__bg_prev(v-show=`status === ${slide[4]}` style=`background-image:url(${slide[5]})`)
+                                            img.project-slider__img(class="visually-hidden" src="" +slide[5])
+                                    .project-slider__filter.project-slider__filter_prev
+                                        svg.project-slider__button-arrow.project-slider__button-arrow_down
+                                            use(xlink:href="./assets/icons/svg/symbols.svg#portf_arrow_down")
+                                button.project-slider__button.project-slider__button_next(@click.prevent="nextBtnClick")
+                                    transition(mode="out-in" enter-active-class="animated slideInUp" leave-active-class="animated slideInDown")
+                                        .project-slider__bg.project-slider__bg_next(v-show=`status === ${slide[4]}` style=`background-image:url(${slide[6]})`)
+                                            img.project-slider__img(class="visually-hidden" src="" +slide[6])
+                                    .project-slider__filter.project-slider__filter_next
+                                        svg.project-slider__button-arrow.project-slider__button-arrow_up
+                                            use(xlink:href="./assets/icons/svg/symbols.svg#portf_arrow_up")
+
+    section.last-section.works__last-section.works-last-section
+    
+        .works-last-section__title Что обо мне говорят
+            svg.works-last-section__title-bg
+                use(xlink:href="./assets/icons/svg/symbols.svg#about_header")
+        .works-last-section__reviews
+            ul.reviews
+                li.reviews__item
+                    .reviews__text
+                        i(class="fa fa-quote-left fa-3x" aria-hidden="true")
+                        p.
+                            Этот парень проходил обучение веб-разработке 
+                            не где-то, а в LoftSchool! 5 месяцев только самых 
+                            тяжелых испытаний и бессонных ночей!
+                    .reviews__user.review-user
+                        .review-user__avatar(style="background-image:url(./assets/images/reviews/kovalchuk.png)")
+                            img.review-user__avatar-img.visually-hidden(src="./assets/images/reviews/kovalchuk.png")
+                        .review-user__about
+                            .review-user__name Ковальчук Дмитрий
+                            .review-user__position основатель Loftschool
+
+            
+                li.reviews__item
+                    .reviews__text
+                        i(class="fa fa-quote-left fa-3x" aria-hidden="true")
+                        p.
+                            Этот код выдержит любые испытания. Только 
+                            пожалуйста, не загружается сайт на слишком 
+                            старых браузерах!
+                    .reviews__user.review-user
+                        .review-user__avatar(style="background-image:url(./assets/images/reviews/sabantsev.png)")
+                            img.review-user__avatar-img.visually-hidden(src="./assets/images/reviews/sabantsev.png")
+                        .review-user__about
+                            .review-user__name Сабанцев Владимир
+                            .review-user__position преподаватель
+
+        .works-last-section__form#works-last-section__form
+            .works-last-section__blur#works-last-section__blur
+            form.works-form(method="POST" action="/send")
+                .works-form__wrapper
+                    .works-form__inputs
+                        .works-form__title Связаться со мной
+                        input.works-form__name(type="text" name="name" placeholder="Имя" required pattern="[A-Z][A-Za-z' -]*")
+                        input.works-form__email(type="email" name="email" placeholder="Email" required)
+                        textarea.works-form__comment(name="message" placeholder="Ваше сообщение" required)
+                    .works-form__controls
+                        button.works-form__btn.works-form__btn_submit(type="submit") Отправить
+                        button.works-form__btn.works-form__btn_reset(type="reset") Очистить
+        a.works-last-section__arrow(href="#")
+            svg.works-last-section__arrow-img
+                use(xlink:href="./assets/icons/svg/symbols.svg#portf_arrow_up")
+
+        

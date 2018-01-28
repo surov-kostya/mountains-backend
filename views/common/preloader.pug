@@ -1,0 +1,30 @@
+section.preloader
+
+    .preloader__spinner
+        .preloader__percent
+        .preloader__ring.preloader__ring_big
+        .preloader__ring.preloader__ring_mid
+        .preloader__ring.preloader__ring_lit
+
+script.
+    const preloader = document.querySelector('.preloader');
+    const spinnerText = document.querySelector('.preloader__percent');
+    let percent = 0;
+
+    spinnerText.innerText = percent + '%';
+
+    document.onreadystatechange = ()=>{
+        if (document.readyState === 'interactive'){
+            let interval = setInterval(()=>{
+                percent++;
+                spinnerText.innerText = percent + '%';
+                if(percent > 98 || document.readyState !== 'interactive'){
+                    preloader.classList.add('preloader_opacity');
+                    clearTimeout(interval);
+                };
+            }, 300);        
+        } else {
+            percent = 99;
+            spinnerText.innerText = percent + '%';
+            preloader.classList.add('visually-hidden');};
+    };

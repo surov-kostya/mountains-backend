@@ -1,0 +1,73 @@
+extends ../template
+
+block title
+    title Обо мне
+    - var page = 'about'
+
+block content
+    section.about-second-section
+        .about-second-section__left.aboute-me
+            .about-me__title 
+                h1 Обо мне
+                svg.about-me__title-img
+                    use(xlink:href='./assets/icons/svg/symbols.svg#about_header')
+            .aboute-me__right
+                .aboute-me__avatar(style="background-image:url(./assets/images/person-card/155312-600.jpg)")
+                    img.about-me__avatar-img.visually-hidden(src='./assets/images/person-card/155312-600.jpg')
+                .about-me__subtitle Кто я
+                .about-me__text
+                    p.
+                        Я веб-разработчик из Санкт-Петербурга. Мне 32 года. 
+                        Я занимаюсь разработкой современных сайтов 
+                        и приложений. Мне нравится делать интересные 
+                        и современные проекты.
+                    p.
+                        Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите,
+                        как тут всё классно и красиво!
+                    
+        .about-second-section__right.my-benefits
+            .my-benefits__title Чем я могу быть вам полезен
+            .my-benefits__text
+                p.
+                    Больше всего меня привлекет Frontend разработка, но я также знаком 
+                    и могу решать не сложные задачи на Backend. Но давайте по порядку.
+                
+            ul.my-benefits__charts
+                each direction in ['Frontend', 'Backend', 'WorkFlow']
+                    li.my-benefits__direction #{direction}
+                        ul.my-benefits__technologies
+                            case direction
+                                when 'Frontend'
+                                    each technology in ['HTML5', 'CSS3', 'JavaScript & jQuery']
+                                        li.my-benefits__technology
+                                            .my-benefits__progress.my-benefits__progress_empty-right
+                                            .my-benefits__progress.my-benefits__progress_filled(data-skill="50")
+                                            .my-benefits__progress.my-benefits__progress_empty-left
+                                            .my-benefits__tech-name #{technology}                                            
+                                when 'Backend'
+                                    each technology in ['PHP', 'mySQL', 'Node.js & npm', 'Mongo.db']
+                                        li.my-benefits__technology
+                                            .my-benefits__progress.my-benefits__progress_empty-right
+                                            .my-benefits__progress.my-benefits__progress_filled(data-skill="55")
+                                            .my-benefits__progress.my-benefits__progress_empty-left
+                                            .my-benefits__tech-name #{technology}
+                                when 'WorkFlow'
+                                    each technology in ['Git', 'Gulp', 'Bower']
+                                        li.my-benefits__technology
+                                            .my-benefits__progress.my-benefits__progress_empty-right
+                                            .my-benefits__progress.my-benefits__progress_filled(data-skill="60")
+                                            .my-benefits__progress.my-benefits__progress_empty-left
+                                            .my-benefits__tech-name #{technology}
+
+
+    section.last-section.about-last-section
+        .about-last-section__map#map
+        .about-last-section__contacts 
+            .about-last-section__contacts-title Контакты
+            ul.contacts
+                each item in [['skype','kostyan5685', "#skype"], ['mailto','surov.qostya@yandex.ru', "#envelope"], ['tel','+79211234567', "#phone"], ['address','Санкт-Петербург, ул. Опьтков', "#map_marker"]]
+                    li.contacts__item(class="contacts__" + item[0])
+                        a.contacts__link(class=`contacts__${item[0]}-link` href=`${item[0]}:${item[1]}`)
+                            svg.contacts__icon
+                                use(xlink:href=`./assets/icons/svg/symbols.svg${item[2]}`)
+                            span.contacts__text #{item[1]}

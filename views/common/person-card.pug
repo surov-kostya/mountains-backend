@@ -1,0 +1,11 @@
+.person-card
+    .person-card__avatar(style="background-image:url(./assets/images/person-card/155312-600.jpg)")
+        img.person-card__avatar-img.visually-hidden(src="./assets/images/person-card/155312-600.jpg")
+
+    case page
+        when 'blog'
+            .person-card__blog Блог
+            .person-card__text Статьи, которые я написал
+        default
+            .person-card__name Суров Константин
+            .person-card__text Личный сайт веб-разработчика

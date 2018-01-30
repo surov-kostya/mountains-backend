@@ -1,5 +1,3 @@
-// import { rename } from 'fs';
-
 var express = require('express');
 var path = require('path');
 // var favicon = require('serve-favicon');
@@ -8,6 +6,18 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const multer = require('multer');
 const nodemailer = require('nodemailer');
+const mongoose = require('mongoose');
+
+
+mongoose.connect('mongodb://mountains:Mountains@ds119028.mlab.com:19028/mountains');
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log('We are connected');
+});
+
+let Article = require('./models/article')
 
 var index = require('./routes/index');
 
@@ -51,6 +61,23 @@ app.post('/avatar', (req, res) =>{
     } else {
       res.render('./pages/node-msg', {msg:'Аватар загружен'});
     }
+  });
+});
+
+// Add article with mongoose
+app.post('/article', (req,res)=>{
+  let article = new Article();
+  article.title = req.body.title;
+  article.date = req.body.date;
+  article.body = req.body.body;
+
+  article.save((err)=>{
+    if (err){
+      console.log(err);
+      return;
+    } else {
+      res.render('./pages/node-msg', {msg:'Статья добавлена в базу'});
+    };
   });
 });
 
